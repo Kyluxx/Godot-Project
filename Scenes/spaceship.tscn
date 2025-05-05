@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://bflkveoodrvro"]
+
+[ext_resource type="Texture2D" uid="uid://bo3ja62wcgi1n" path="res://kenney_space-shooter-redux/PNG/playerShip3_blue.png" id="1_5ajj3"]
+[ext_resource type="Script" uid="uid://cbry2p3r7byhs" path="res://Scenes/spaceship.gd" id="1_qkqkj"]
+
+[node name="Spaceship" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 6
+script = ExtResource("1_qkqkj")
+
+[node name="SpaceshipImage" type="Sprite2D" parent="."]
+texture = ExtResource("1_5ajj3")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(0, -38, 4, -38, 10, -25, 48, 21, 49, 29, 41, 29, 40, 28, 23, 29, 14, 38, -13, 38, -23, 29, -39, 29, -41, 31, -49, 30, -49, 22, -12, -23, -5, -38)

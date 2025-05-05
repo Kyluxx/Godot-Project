@@ -1,0 +1,67 @@
+[gd_scene load_steps=7 format=3 uid="uid://bn6sy3lj6y662"]
+
+[ext_resource type="Script" uid="uid://cpofm28st6g36" path="res://Scenes/level.gd" id="1_81xng"]
+[ext_resource type="PackedScene" uid="uid://bflkveoodrvro" path="res://Scenes/spaceship.tscn" id="1_tumq0"]
+[ext_resource type="Texture2D" uid="uid://cj5lodxvonixk" path="res://kenney_space-shooter-redux/Backgrounds/darkPurple.png" id="2_6phgx"]
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_6phgx"]
+a = Vector2(-4, 380)
+b = Vector2(-4, -377)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_81xng"]
+a = Vector2(626, 4)
+b = Vector2(-665, 4)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_wqkje"]
+a = Vector2(639, -15)
+b = Vector2(-653, -15)
+
+[node name="Level" type="Node2D"]
+script = ExtResource("1_81xng")
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(640, 364.5)
+scale = Vector2(5.13281, 2.95703)
+texture = ExtResource("2_6phgx")
+
+[node name="Spaceship" parent="." instance=ExtResource("1_tumq0")]
+position = Vector2(1, 3)
+
+[node name="Borders" type="Node2D" parent="."]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Borders"]
+collision_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Borders/StaticBody2D"]
+position = Vector2(1285, 361)
+shape = SubResource("SegmentShape2D_6phgx")
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="Borders"]
+collision_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Borders/StaticBody2D3"]
+position = Vector2(662, -3)
+shape = SubResource("SegmentShape2D_81xng")
+
+[node name="StaticBody2D4" type="StaticBody2D" parent="Borders"]
+position = Vector2(547, 182)
+collision_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Borders/StaticBody2D4"]
+position = Vector2(104, 558)
+shape = SubResource("SegmentShape2D_wqkje")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="Borders"]
+collision_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Borders/StaticBody2D2"]
+position = Vector2(4, 368)
+shape = SubResource("SegmentShape2D_6phgx")
+
+[node name="MeteorTimer" type="Timer" parent="."]
+wait_time = 0.2
+autostart = true
+
+[node name="Meteors" type="Node2D" parent="."]
+
+[connection signal="timeout" from="MeteorTimer" to="." method="_on_meteor_timer_timeout"]
