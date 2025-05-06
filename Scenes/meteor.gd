@@ -1,5 +1,5 @@
 extends Area2D
-
+signal collide
 var speed: int
 var rotation_speed: int
 var directionX: float
@@ -7,7 +7,7 @@ var directionX: float
 func _ready() -> void:
 	var rng := RandomNumberGenerator.new()
 	var width := get_viewport().get_visible_rect().size[0]
-	var randomX := rng.randi_range(0, width)
+	var randomX := rng.randf_range(0, width)
 	var randomY := rng.randi_range(-150, -50)
 	position = Vector2(randomX, randomY)
 	
@@ -24,6 +24,10 @@ func _process(delta):
 	position += Vector2(directionX, 1.0) * delta * speed
 	rotation_degrees += rotation_speed * delta
 
-func _on_body_entered(body: Node2D) -> void:
-	print("Body Entered")
-	print(body)
+func _on_body_entered(_body) -> void:
+	collide.emit()
+
+
+func _on_area_entered(area: Area2D) -> void:
+	area.queue_free()
+	queue_free()
